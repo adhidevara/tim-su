@@ -49,35 +49,35 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] 		= 'C_login';
-$route['login']				 		= 'C_login/login';
-$route['register']			 		= 'C_login/regist_tim';
+$route['default_controller'] 					= 'C_login';
+$route['login']				 					= 'C_login/login';
+$route['register']			 					= 'C_login/regist_tim';
 
-$route['dashboard-tim']	     		= 'C_tim';
-$route['tasks']			     		= 'C_tim/vTasks';
-$route['progress']			 		= 'C_tim/vProgress';
-$route['create-progress']	 		= 'C_tim/vCreateProgress';
-$route['discussion']		 		= 'C_tim/vDiscussion';
-$route['detail-discussion/(:any)']	= 'C_tim/vDetailDiscussion/$1';
-$route['materi-news-event']			= 'C_tim/vMNE';
+$route['dashboard-tim']	     					= 'C_tim';
+$route['tasks']			     					= 'C_tim/vTasks';
+$route['progress']			 					= 'C_tim/vProgress';
+$route['create-progress']	 					= 'C_tim/vCreateProgress';
+$route['discussion']		 					= 'C_tim/vDiscussion';
+$route['detail-discussion/(:any)']				= 'C_tim/vDetailDiscussion/$1';
+$route['materi-news-event']						= 'C_tim/vMNE';
 
-$route['dashboard-mentor']	 		= 'C_mentor';
-$route['pick-tim']			 		= 'C_mentor/vPickTims';
-$route['review-tasks']			    = 'C_mentor/vTasks';
-$route['cek-progress']			 	= 'C_mentor/vProgress';
-$route['create-task']	 			= 'C_mentor/vCreateTask';
-$route['discussion-mentor']	 		= 'C_mentor/vDiscussion/';
-$route['detail-discussion-mentor/(:any)']	= 'C_mentor/vDetailDiscussion/$1';
-$route['materi-news-event-mentor']	= 'C_mentor/vMNE';
+$route['dashboard-mentor']	 					= 'C_mentor';
+$route['pick-tim']			 					= 'C_mentor/vPickTims';
+$route['review-tasks']			    			= 'C_mentor/vTasks';
+$route['cek-progress']			 				= 'C_mentor/vProgress';
+$route['create-task']	 						= 'C_mentor/vCreateTask';
+$route['discussion-mentor']	 					= 'C_mentor/vDiscussion/';
+$route['detail-discussion-mentor/(:any)']		= 'C_mentor/vDetailDiscussion/$1';
+$route['materi-news-event-mentor']				= 'C_mentor/vMNE';
 
-$route['dashboard-admin']	 		= 'C_admin';
-$route['manage-tasks']		 		= 'C_admin/vTasks';
-$route['manage-user']		 		= 'C_admin/vUsers';
-$route['manage-progress']			= 'C_admin/vProgress';
-$route['manage-discussion']		 	= 'C_admin/vDiscussion';
+$route['dashboard-admin']	 					= 'C_admin';
+$route['manage-tasks']		 					= 'C_admin/vTasks';
+$route['manage-user']		 					= 'C_admin/vUsers';
+$route['manage-progress']						= 'C_admin/vProgress';
+$route['manage-discussion']		 				= 'C_admin/vDiscussion';
 $route['manage-detail-discussion/(:any)']		= 'C_admin/vDetailDiscussion/$1';
 $route['manage-detail-discussionnon/(:any)']	= 'C_admin/vDetailDiscussionNon/$1';
 $route['manage-materi-news-event-mentor']		= 'C_admin/vMNE';
 
-$route['404_override'] 				= 'C_login';
-$route['translate_uri_dashes'] 		= FALSE;
+$route['404_override'] 							= 'C_login';
+$route['translate_uri_dashes'] 					= FALSE;
