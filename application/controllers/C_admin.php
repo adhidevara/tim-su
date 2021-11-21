@@ -31,6 +31,13 @@ class C_admin extends CI_Controller
 		$this->load->view('dash_admin/index', $data);
 	}
 
+	public function vUsers()
+	{
+		$data['getTim'] = $this->M_admin->getTim();
+		$data['getMentor'] = $this->M_admin->getMentor();
+		$this->load->view('dash_admin/users', $data);
+	}
+
 	public function vTasks()
 	{
 		$data['tasks'] = $this->M_admin->getTasks();
@@ -121,14 +128,14 @@ class C_admin extends CI_Controller
 			$data = [
 				'is_verified' => 'unverified'
 			];
-			$this->M_admin->update('tims', $id, $case, $data);
+			$this->M_admin->update('id_tim', $id, $case, $data);
 			redirect('manage-user');
 		}
 		elseif ($case == 'mentors'){
 			$data = [
 				'is_verified' => 'unverified'
 			];
-			$this->M_admin->update('mentors', $id, $case, $data);
+			$this->M_admin->update('id_mentor', $id, $case, $data);
 			redirect('manage-user');
 		}
 	}
@@ -153,14 +160,14 @@ class C_admin extends CI_Controller
 			$data = [
 				'is_verified' => 'verified'
 			];
-			$this->M_admin->update('tims', $id, $case, $data);
+			$this->M_admin->update('id_tim', $id, $case, $data);
 			redirect('manage-user');
 		}
 		elseif ($case == 'mentors'){
 			$data = [
 				'is_verified' => 'verified'
 			];
-			$this->M_admin->update('mentors', $id, $case, $data);
+			$this->M_admin->update('id_mentor', $id, $case, $data);
 			redirect('manage-user');
 		}
 	}

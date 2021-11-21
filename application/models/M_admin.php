@@ -4,6 +4,18 @@ if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 class M_admin extends CI_Model
 {
+	public function getTim()
+	{
+		$this->db->from('tims');
+		return $this->db->get()->result();
+	}
+
+	public function getMentor()
+	{
+		$this->db->from('mentors');
+		return $this->db->get()->result();
+	}
+
 	public function getMyProfile($id_admin)
 	{
 		$this->db->from('admins');

@@ -152,7 +152,7 @@ if (isset($_GET['preload']) && $_GET['preload'] == 1){
 			</ul>
 			<div class="add-menu-sidebar">
 				<img src="<?=base_url('assets')?>/images/calendar.png" alt="" class="mr-3">
-				<a href="<?=base_url('create-progress')?>" class="font-w500 mb-0 text-white">Register Mentor</a>
+				<a href="#" class="font-w500 mb-0 text-white" data-toggle="modal" data-target="#aAddMateri">Register Mentor</a>
 			</div>
 			<div class="copyright">
 				<p><strong>Tim-Startup Dashboard</strong> © 2021 All Rights Reserved</p>
@@ -163,3 +163,38 @@ if (isset($_GET['preload']) && $_GET['preload'] == 1){
 	<!--**********************************
 		Sidebar end
 	***********************************-->
+	<!-- Modal -->
+	<div class="modal fade" id="aAddMentor">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Add Materi</h5>
+					<button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form action="<?=base_url('C_admin/addMateri')?>" method="POST" enctype="multipart/form-data">
+						<div class="form-group">
+							<label>Judul Materi</label>
+							<input type="text" class="form-control" placeholder="Judul" name="judul">
+							<input type="hidden" name="id_materi" value="<?=count($materi)+1?>">
+						</div>
+						<div class="form-group">
+							<label>Link Materi</label>
+							<input type="text" class="form-control" placeholder="Link Materi" name="url">
+						</div>
+						<div class="input-group mb-3">
+							<div class="custom-file">
+								<input type="file" class="custom-file-input" name="foto">
+								<label class="custom-file-label">Choose file</label>
+							</div>
+							<div class="input-group-append">
+								<span class="input-group-text">Upload Foto Materi</span>
+							</div>
+						</div>
+						<button class="btn btn-primary" type="submit">Submit</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>

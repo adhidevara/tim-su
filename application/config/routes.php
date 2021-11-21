@@ -72,11 +72,12 @@ $route['materi-news-event-mentor']	= 'C_mentor/vMNE';
 
 $route['dashboard-admin']	 		= 'C_admin';
 $route['manage-tasks']		 		= 'C_admin/vTasks';
+$route['manage-user']		 		= 'C_admin/vUsers';
 $route['manage-progress']			= 'C_admin/vProgress';
 $route['manage-discussion']		 	= 'C_admin/vDiscussion';
-$route['manage-detail-discussion/(:any)']	= 'C_admin/vDetailDiscussion/$1';
+$route['manage-detail-discussion/(:any)']		= 'C_admin/vDetailDiscussion/$1';
 $route['manage-detail-discussionnon/(:any)']	= 'C_admin/vDetailDiscussionNon/$1';
-$route['manage-materi-news-event-mentor']	= 'C_admin/vMNE';
+$route['manage-materi-news-event-mentor']		= 'C_admin/vMNE';
 
 $route['404_override'] 				= 'C_login';
 $route['translate_uri_dashes'] 		= FALSE;
