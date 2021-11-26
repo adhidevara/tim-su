@@ -6,7 +6,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
-	<title>Tim Startup</title>
+	<title>Startup Launchpad</title>
 	<!-- Favicon icon -->
 	<link rel="icon" type="image/png" sizes="16x16" href="<?php echo base_url('assets') ?>/images/favicon.png">
 	<!-- Daterange picker -->
@@ -154,6 +154,11 @@ if (isset($_GET['preload']) && $_GET['preload'] == 1){
 				<img src="<?=base_url('assets')?>/images/calendar.png" alt="" class="mr-3">
 				<a href="#" class="font-w500 mb-0 text-white" data-toggle="modal" data-target="#aAddMentor">Register Mentor</a>
 			</div>
+
+			<div class="add-menu-sidebar">
+				<img src="<?=base_url('assets')?>/images/calendar.png" alt="" class="mr-3">
+				<a href="#" class="font-w500 mb-0 text-white" data-toggle="modal" data-target="#aAddAdmin">Register Admin</a>
+			</div>
 			<div class="copyright">
 				<p><strong>Tim-Startup Dashboard</strong> © 2021 All Rights Reserved</p>
 				<p>Made with <span class="heart"></span></p>
@@ -201,6 +206,52 @@ if (isset($_GET['preload']) && $_GET['preload'] == 1){
 							</div>
 							<div class="input-group-append">
 								<span class="input-group-text">Upload Foto Mentor</span>
+							</div>
+						</div>
+						<button class="btn btn-primary" type="submit">Submit</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="aAddAdmin">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Register Admin</h5>
+					<button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form action="<?=base_url('C_admin/addAdmin')?>" method="POST" enctype="multipart/form-data">
+						<div class="form-group">
+							<label>Nama</label>
+							<input type="text" class="form-control" placeholder="Nama Lengkap" name="nama">
+						</div>
+						<div class="form-group">
+							<label>Email</label>
+							<input type="text" class="form-control" placeholder="Email" name="email">
+						</div>
+						<div class="form-group">
+							<label>Password</label>
+							<input type="password" class="form-control" placeholder="Password" name="password">
+						</div>
+						<div class="form-group">
+							<label>Ulangi Password</label>
+							<input type="password" class="form-control" placeholder="Ulangi Password" name="repassword">
+						</div>
+						<div class="form-group">
+							<label>No Telepon</label>
+							<input type="text" class="form-control" placeholder="No Telepon" name="notelp">
+						</div>
+						<div class="input-group mb-3">
+							<div class="custom-file">
+								<input type="file" class="custom-file-input" name="foto">
+								<label class="custom-file-label">Choose file</label>
+							</div>
+							<div class="input-group-append">
+								<span class="input-group-text">Upload Foto Admin</span>
 							</div>
 						</div>
 						<button class="btn btn-primary" type="submit">Submit</button>

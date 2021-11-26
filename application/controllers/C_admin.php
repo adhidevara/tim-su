@@ -152,6 +152,122 @@ class C_admin extends CI_Controller
 		}
 	}
 
+	public function addAdmin()
+	{
+		$input = $this->input->post();
+		$cekMentor = $this->M_akun->getAkun('admins', 'email', $input['email']);
+
+		if (count($cekMentor) == 0){
+			if ($input['email'] == "" || $input['password'] == "" || $input['nama'] == "" || $input['repassword'] == "" ||
+				$input['notelp'] == ""){
+				?>
+				<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+				<script src="<?php echo base_url('assets') ?>/js/jquery.min.js"></script>
+				<script type="text/javascript">
+					$(document).ready(function() {
+						Swal.fire({
+							icon: 'error',
+							title: 'Form Belum Lengkap',
+							text: 'Ups, mungkin form ada yang belum diisi',
+						}).then(function() {
+							window.location = '<?= base_url() ?>manage-user';
+						});
+					});
+				</script>
+				<?php
+			}
+			else{
+				if ($input['password'] == $input['repassword']){
+					$input = $this->input->post();
+
+					$this->M_akun->createAkun('users', [
+						'nama'			=> $input['nama'],
+						'email' 		=> $input['email'],
+						'role'			=> 'Admin',
+						'password'		=> $this->encryption->encrypt($input['password']),
+					]);
+					$getUser = $this->M_akun->getAkun('users', 'email', $input['email']);
+
+					$config['file_name'] = $getUser[0]->id_user."-".$input['nama']."-".date("Y-m-d H-i-s");
+					$config['upload_path'] = './assets/fotoAdmin';
+					$config['allowed_types'] = 'jpg|png|jpeg';
+					$config['max_size']  = '10000';
+
+					$this->load->library('upload', $config);
+					$this->upload->initialize($config);
+
+					if ( ! $this->upload->do_upload('foto')){
+						$error = array('error' => $this->upload->display_errors());
+						?>
+						<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+						<script src="<?php echo base_url('assets') ?>/js/jquery.min.js"></script>
+						<script type="text/javascript">
+							$(document).ready(function() {
+								Swal.fire({
+									icon: 'error',
+									title: 'Error Upload File',
+									text: '<?=$error['error']?>',
+								}).then(function() {
+									window.location = '<?= base_url("manage-user")?>';
+								});
+							});
+						</script>
+						<?php
+					}
+					else{
+						$data = $this->upload->data();
+						$this->M_akun->updateUser('id_user', $getUser[0]->id_user, 'users', [
+							'foto'			=> base_url().'assets/fotoAdmin/'.$data['file_name']
+						]);
+						$this->M_akun->createAkun('admins', [
+							'id_user'		=> $getUser[0]->id_user,
+							'nama'			=> $input['nama'],
+							'email'			=> $input['email'],
+							'password'		=> $this->encryption->encrypt($input['password']),
+							'notelp'		=> $input['notelp'],
+							'foto'			=> base_url().'assets/fotoAdmin/'.$data['file_name'],
+						]);
+						redirect(base_url().'manage-user', 'refresh');
+					}
+				}
+				else{
+					?>
+					<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+					<script src="<?php echo base_url('assets') ?>/js/jquery.min.js"></script>
+					<script type="text/javascript">
+						$(document).ready(function() {
+							Swal.fire({
+								icon: 'error',
+								title: 'Password Tidak Sama',
+								text: 'Ups, mungkin password anda tidak sama',
+							}).then(function() {
+								window.location = '<?= base_url('dashboard-admin') ?>';
+							});
+						});
+					</script>
+					<?php
+				}
+			}
+		}
+		else{
+			?>
+			<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+			<script src="<?php echo base_url('assets') ?>/js/jquery.min.js"></script>
+			<script type="text/javascript">
+				$(document).ready(function() {
+					Swal.fire({
+						icon: 'error',
+						title: 'Akun Sudah Ada',
+						text: 'Ups, mungkin akun anda sudah terdaftar',
+					}).then(function() {
+						window.location = '<?= base_url('dashboard-admin') ?>';
+					});
+				});
+			</script>
+			<?php
+		}
+	}
+
 	public function vUsers()
 	{
 		$data['getTim'] = $this->M_admin->getTim();
