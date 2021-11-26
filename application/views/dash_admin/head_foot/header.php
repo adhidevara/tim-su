@@ -152,7 +152,7 @@ if (isset($_GET['preload']) && $_GET['preload'] == 1){
 			</ul>
 			<div class="add-menu-sidebar">
 				<img src="<?=base_url('assets')?>/images/calendar.png" alt="" class="mr-3">
-				<a href="#" class="font-w500 mb-0 text-white" data-toggle="modal" data-target="#aAddMateri">Register Mentor</a>
+				<a href="#" class="font-w500 mb-0 text-white" data-toggle="modal" data-target="#aAddMentor">Register Mentor</a>
 			</div>
 			<div class="copyright">
 				<p><strong>Tim-Startup Dashboard</strong> © 2021 All Rights Reserved</p>
@@ -168,20 +168,31 @@ if (isset($_GET['preload']) && $_GET['preload'] == 1){
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title">Add Materi</h5>
+					<h5 class="modal-title">Register Mentor</h5>
 					<button type="button" class="close" data-dismiss="modal"><span>&times;</span>
 					</button>
 				</div>
 				<div class="modal-body">
-					<form action="<?=base_url('C_admin/addMateri')?>" method="POST" enctype="multipart/form-data">
+					<form action="<?=base_url('C_admin/addMentor')?>" method="POST" enctype="multipart/form-data">
 						<div class="form-group">
-							<label>Judul Materi</label>
-							<input type="text" class="form-control" placeholder="Judul" name="judul">
-							<input type="hidden" name="id_materi" value="<?=count($materi)+1?>">
+							<label>Nama</label>
+							<input type="text" class="form-control" placeholder="Nama Lengkap" name="nama">
 						</div>
 						<div class="form-group">
-							<label>Link Materi</label>
-							<input type="text" class="form-control" placeholder="Link Materi" name="url">
+							<label>Email</label>
+							<input type="text" class="form-control" placeholder="Email" name="email">
+						</div>
+						<div class="form-group">
+							<label>Password</label>
+							<input type="password" class="form-control" placeholder="Password" name="password">
+						</div>
+						<div class="form-group">
+							<label>Ulangi Password</label>
+							<input type="password" class="form-control" placeholder="Ulangi Password" name="repassword">
+						</div>
+						<div class="form-group">
+							<label>No Telepon</label>
+							<input type="text" class="form-control" placeholder="No Telepon" name="notelp">
 						</div>
 						<div class="input-group mb-3">
 							<div class="custom-file">
@@ -189,7 +200,7 @@ if (isset($_GET['preload']) && $_GET['preload'] == 1){
 								<label class="custom-file-label">Choose file</label>
 							</div>
 							<div class="input-group-append">
-								<span class="input-group-text">Upload Foto Materi</span>
+								<span class="input-group-text">Upload Foto Mentor</span>
 							</div>
 						</div>
 						<button class="btn btn-primary" type="submit">Submit</button>

@@ -24,11 +24,132 @@ class C_admin extends CI_Controller
 
 	public function index()
 	{
+		$data['jmlTimTerdaftar']	= count($this->M_admin->jmlTimTerdaftar());
+		$data['jmlMentorAktif']		= count($this->M_admin->jmlMentorAktif());
+		$data['jmlAdmin']			= count($this->M_admin->jmlAdmin());
+		$data['jmlDiskusi']			= count($this->M_admin->jmlDiskusi());
 		$data['getMyProfile']		= $this->M_admin->getMyProfile($this->session->all_userdata()['userdata']['id_admin']);
 		$data['getNews'] 			= $this->M_tim->getNews();
 		$data['getEvent']			= $this->M_tim->getEvent();
 		$data['getMateri']			= $this->M_tim->getMateri();
+
 		$this->load->view('dash_admin/index', $data);
+	}
+
+	public function addMentor()
+	{
+		$input = $this->input->post();
+		$cekMentor = $this->M_akun->getAkun('mentors', 'email', $input['email']);
+
+		if (count($cekMentor) == 0){
+			if ($input['email'] == "" || $input['password'] == "" || $input['nama'] == "" || $input['repassword'] == "" ||
+				$input['notelp'] == ""){
+				?>
+				<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+				<script src="<?php echo base_url('assets') ?>/js/jquery.min.js"></script>
+				<script type="text/javascript">
+					$(document).ready(function() {
+						Swal.fire({
+							icon: 'error',
+							title: 'Form Belum Lengkap',
+							text: 'Ups, mungkin form ada yang belum diisi',
+						}).then(function() {
+							window.location = '<?= base_url() ?>manage-user';
+						});
+					});
+				</script>
+				<?php
+			}
+			else{
+				if ($input['password'] == $input['repassword']){
+					$input = $this->input->post();
+
+					$this->M_akun->createAkun('users', [
+						'nama'			=> $input['nama'],
+						'email' 		=> $input['email'],
+						'role'			=> 'Mentor',
+						'password'		=> $this->encryption->encrypt($input['password']),
+					]);
+					$getUser = $this->M_akun->getAkun('users', 'email', $input['email']);
+
+					$config['file_name'] = $getUser[0]->id_user."-".$input['nama']."-".date("Y-m-d H-i-s");
+					$config['upload_path'] = './assets/fotoMentor';
+					$config['allowed_types'] = 'jpg|png|jpeg';
+					$config['max_size']  = '10000';
+
+					$this->load->library('upload', $config);
+					$this->upload->initialize($config);
+
+					if ( ! $this->upload->do_upload('foto')){
+						$error = array('error' => $this->upload->display_errors());
+						?>
+						<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+						<script src="<?php echo base_url('assets') ?>/js/jquery.min.js"></script>
+						<script type="text/javascript">
+							$(document).ready(function() {
+								Swal.fire({
+									icon: 'error',
+									title: 'Error Upload File',
+									text: '<?=$error['error']?>',
+								}).then(function() {
+									window.location = '<?= base_url("manage-user")?>';
+								});
+							});
+						</script>
+						<?php
+					}
+					else{
+						$data = $this->upload->data();
+						$this->M_akun->updateUser('id_user', $getUser[0]->id_user, 'users', [
+							'foto'			=> base_url().'assets/fotoMentor/'.$data['file_name']
+						]);
+						$this->M_akun->createAkun('mentors', [
+							'id_user'		=> $getUser[0]->id_user,
+							'nama'			=> $input['nama'],
+							'email'			=> $input['email'],
+							'password'		=> $this->encryption->encrypt($input['password']),
+							'no_telp'		=> $input['notelp'],
+							'foto'			=> base_url().'assets/fotoMentor/'.$data['file_name'],
+						]);
+						redirect(base_url().'manage-user', 'refresh');
+					}
+				}
+				else{
+					?>
+					<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+					<script src="<?php echo base_url('assets') ?>/js/jquery.min.js"></script>
+					<script type="text/javascript">
+						$(document).ready(function() {
+							Swal.fire({
+								icon: 'error',
+								title: 'Password Tidak Sama',
+								text: 'Ups, mungkin password anda tidak sama',
+							}).then(function() {
+								window.location = '<?= base_url('dashboard-admin') ?>';
+							});
+						});
+					</script>
+					<?php
+				}
+			}
+		}
+		else{
+			?>
+			<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+			<script src="<?php echo base_url('assets') ?>/js/jquery.min.js"></script>
+			<script type="text/javascript">
+				$(document).ready(function() {
+					Swal.fire({
+						icon: 'error',
+						title: 'Akun Sudah Ada',
+						text: 'Ups, mungkin akun anda sudah terdaftar',
+					}).then(function() {
+						window.location = '<?= base_url('dashboard-admin') ?>';
+					});
+				});
+			</script>
+			<?php
+		}
 	}
 
 	public function vUsers()
@@ -281,7 +402,7 @@ class C_admin extends CI_Controller
 
 	public function vMNE()
 	{
-		$data['materi'] = $this->M_tim->getMateri();
+		$data['materi'] = $this->M_admin->getMateri();
 		$data['news'] = $this->M_tim->getNews();
 		$data['event'] = $this->M_tim->getEvent();
 		$this->load->view('dash_admin/materi-news-event', $data);
@@ -299,22 +420,12 @@ class C_admin extends CI_Controller
 		$this->upload->initialize($config);
 
 		if ( ! $this->upload->do_upload('foto')){
-			$error = array('error' => $this->upload->display_errors());
-			?>
-			<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-			<script src="<?php echo base_url('assets') ?>/js/jquery.min.js"></script>
-			<script type="text/javascript">
-				$(document).ready(function() {
-					Swal.fire({
-						icon: 'error',
-						title: 'Error',
-						text: '<?php echo $error['error']; ?>',
-					}).then(function() {
-						window.location = '<?= base_url("/manage-materi-news-event-mentor") ?>';
-					});
-				});
-			</script>
-			<?php
+			$data = array(
+				'judul'		=> $input['judul'],
+				'url' 		=> $input['url'],
+			);
+			$this->M_mentor->insertMateri($data);
+			redirect(base_url().'manage-materi-news-event-mentor', 'refresh');
 		}
 		else{
 			$data 	= $this->upload->data();
@@ -326,6 +437,53 @@ class C_admin extends CI_Controller
 			$this->M_mentor->insertMateri($data);
 			redirect(base_url().'manage-materi-news-event-mentor', 'refresh');
 		}
+	}
+
+	public function updateMateri($id)
+	{
+		$input = $this->input->post();
+		$this->M_admin->update('id_materi', $id, 'materi', [
+			'judul' => $input['judul'],
+			'url'	=> $input['url']
+		]);
+		redirect('manage-materi-news-event-mentor');
+	}
+
+	public function updateNews($id)
+	{
+		$input = $this->input->post();
+		$this->M_admin->update('id_news', $id, 'news', [
+			'judul' => $input['judul'],
+			'link'	=> $input['url']
+		]);
+		redirect('manage-materi-news-event-mentor');
+	}
+
+	public function updateEvent($id)
+	{
+		$input = $this->input->post();
+		$this->M_admin->update('id_event', $id, 'events', [
+			'judul' 	=> $input['judul'],
+			'deskripsi'	=> $input['deskripsi'],
+			'tanggal'	=> $input['tanggal']
+		]);
+		redirect('manage-materi-news-event-mentor');
+	}
+
+	public function deleteMNE($id, $tbl, $field)
+	{
+		$this->M_admin->update($field, $id, $tbl, [
+			'is_verified' => 'unverified'
+		]);
+		redirect('manage-materi-news-event-mentor');
+	}
+
+	public function restoreMNE($id, $tbl, $field)
+	{
+		$this->M_admin->update($field, $id, $tbl, [
+			'is_verified' => 'verified'
+		]);
+		redirect('manage-materi-news-event-mentor');
 	}
 
 	public function addNews()
@@ -340,22 +498,13 @@ class C_admin extends CI_Controller
 		$this->upload->initialize($config);
 
 		if ( ! $this->upload->do_upload('foto')){
-			$error = array('error' => $this->upload->display_errors());
-			?>
-			<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-			<script src="<?php echo base_url('assets') ?>/js/jquery.min.js"></script>
-			<script type="text/javascript">
-				$(document).ready(function() {
-					Swal.fire({
-						icon: 'error',
-						title: 'Error',
-						text: '<?php echo $error['error']; ?>',
-					}).then(function() {
-						window.location = '<?= base_url("/manage-materi-news-event-mentor") ?>';
-					});
-				});
-			</script>
-			<?php
+			$data = array(
+				'id_admin'	=> $this->session->all_userdata()['userdata']['id_admin'],
+				'judul'		=> $input['judul'],
+				'link' 		=> $input['link'],
+			);
+			$this->M_admin->insert('news', $data);
+			redirect(base_url().'manage-materi-news-event-mentor', 'refresh');
 		}
 		else{
 			$data 	= $this->upload->data();

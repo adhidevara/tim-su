@@ -28,7 +28,6 @@
 										<th>Mentor</th>
 										<th>Judul</th>
 										<th>Review</th>
-										<th>Action</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -49,16 +48,6 @@
 											<?php }else{ ?>
 											<div class="d-flex align-items-center"><i class="fa fa-circle text-danger mr-1 text-capitalize"></i> <?=$t->review?></div>
 											<?php } ?>
-										</td>
-										<td>
-											<div class="d-flex">
-												<a href="#" class="btn btn-primary shadow btn-xs sharp mr-1" data-toggle="modal" data-target="#taskModal-<?=$t->id_task?>"><i class="fa fa-pencil"></i></a>
-												<?php if ($t->is_verified == 1){ ?>
-												<a href="<?=base_url('C_admin/isUnverif/'.$t->id_task.'/tasks')?>" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-ban"></i></a>
-												<?php }else{ ?>
-												<a href="<?=base_url('C_admin/isVerif/'.$t->id_task.'/tasks')?>" class="btn btn-success shadow btn-xs sharp"><i class="fa fa-check"></i></a>
-												<?php } ?>
-											</div>
 										</td>
 									</tr>
 									<!-- review -->

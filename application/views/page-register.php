@@ -11,7 +11,7 @@
                             <div class="col-xl-12">
                                 <div class="auth-form">
 									<div class="text-center mb-3">
-										<a href="index.html"><img src="<?php echo base_url('assets') ?>/images/logo-full.png" alt=""></a>
+										<a href="<?php echo base_url() ?>" class="bg-white rounded py-4 px-3"><img src="<?php echo base_url('assets') ?>/images/logo-full.png" alt=""></a>
 									</div>
                                     <h4 class="text-center mb-4 text-white">Daftar account</h4>
                                     <form action="<?php echo base_url('C_login/proRegist') ?>" method="POST">

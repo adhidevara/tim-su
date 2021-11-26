@@ -141,7 +141,7 @@
 									<h4 class="text-black font-w600 fs-20 mb-0">News</h4>
 								</div>
 								<?php foreach ($getNews as $news){ ?>
-								<div class="card-body loadmore-content height750 dz-scroll pt-0" id="FeaturedMenusContent">
+								<div class="card-body loadmore-content dz-scroll pt-0" id="FeaturedMenusContent">
 									<div class="media mb-4">
 										<img src="<?=$news->foto?>" width="85" alt="" class="rounded mr-3">
 										<div class="media-body">

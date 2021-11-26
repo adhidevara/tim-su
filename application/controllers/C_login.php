@@ -29,6 +29,7 @@ class C_login extends CI_Controller {
 
 	public function proLogin()
 	{
+		error_reporting(0);
 		$input = $this->input->post();
 
 		if ($input['role'] == md5('tim-su')){
@@ -88,8 +89,27 @@ class C_login extends CI_Controller {
 
 		if (count($cekAkun) !== 0 && count($cekAkun) == 1){
 			if ($input['password'] == $this->encryption->decrypt($cekAkun[0]->password)){
-				$this->session->set_userdata('userdata', $userdata);
-				redirect($redirectTo."?preload=1");
+				if ($cekAkun[0]->is_verified == 'verified'){
+					$this->session->set_userdata('userdata', $userdata);
+					redirect($redirectTo."?preload=1");
+				}
+				else{
+					?>
+					<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+					<script src="<?php echo base_url('assets') ?>/js/jquery.min.js"></script>
+					<script type="text/javascript">
+						$(document).ready(function() {
+							Swal.fire({
+								icon: 'error',
+								title: 'Akun Tidak Aktif',
+								text: 'Ups, mungkin akun anda tidak aktif, hubungi admin!',
+							}).then(function() {
+								window.location = '<?= base_url("/login?usercontext=".md5($role)) ?>';
+							});
+						});
+					</script>
+					<?php
+				}
 			}
 			else{
 				?>

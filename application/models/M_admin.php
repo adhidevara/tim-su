@@ -88,4 +88,37 @@ class M_admin extends CI_Model
 		$this->db->update($tb, $data);
 	}
 
+	public function jmlTimTerdaftar()
+	{
+		$this->db->from('tims');
+		return $this->db->get()->result();
+	}
+
+	public function jmlMentorAktif()
+	{
+		$this->db->select('m.*');
+		$this->db->distinct();
+		$this->db->from('mentors m');
+		$this->db->join('tims t', 'm.id_mentor = t.id_mentor');
+		return $this->db->get()->result();
+	}
+
+	public function jmlAdmin()
+	{
+		$this->db->from('admins');
+		return $this->db->get()->result();
+	}
+
+	public function jmlDiskusi()
+	{
+		$this->db->from('diskusi');
+		return $this->db->get()->result();
+	}
+
+	public function getMateri()
+	{
+		$this->db->from('materi');
+		return $this->db->get()->result();
+	}
+
 }

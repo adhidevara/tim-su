@@ -58,6 +58,10 @@
 																<li class="list-group-item d-flex justify-content-between"><span class="mb-0">Minggu Ke :</span><strong><?=$pro['minggu_ke']?></strong></li>
 																<li class="list-group-item d-flex justify-content-between"><span class="mb-0">Deskripsi :</span></li>
 																<li class="list-group-item d-flex justify-content-between text-justify"><span class="mt-0"><strong><?=$pro['deskripsi']?></strong></span></li>
+																<li class="list-group-item d-flex justify-content-between"><span class="mb-0">Catatan Tim :</span></li>
+																<li class="list-group-item d-flex justify-content-between text-justify"><span class="mt-0"><strong><?=$pro['note_tim']?></strong></span></li>
+																<li class="list-group-item d-flex justify-content-between"><span class="mb-0">Catatan Mentor :</span></li>
+																<li class="list-group-item d-flex justify-content-between text-justify"><span class="mt-0"><strong><?=$pro['note_mentor']?></strong></span></li>
 															</ul>
 														</div>
 														<form method="POST" action="<?=base_url('C_tim/updateProgress/'.$pro['id_progresses'])?>" enctype="multipart/form-data">
@@ -69,7 +73,8 @@
 																	<span class="input-group-text">%</span>
 																</div>
 															</div>
-
+															<label class="mt-3">Catatan Tim</label>
+															<textarea name="note_tim" placeholder="Tulis Catatan..." class="rounded p-3" rows="5"><?=$pro['note_tim']?></textarea>
 														</div>
 														<button class="btn btn-danger btn-block" type="submit">Submit</button>
 														</form>
@@ -133,6 +138,10 @@
 																<li class="list-group-item d-flex justify-content-between"><span class="mb-0">Minggu Ke :</span><strong><?=$pro['minggu_ke']?></strong></li>
 																<li class="list-group-item d-flex justify-content-between"><span class="mb-0">Deskripsi :</span></li>
 																<li class="list-group-item d-flex justify-content-between text-justify"><span class="mt-0"><strong><?=$pro['deskripsi']?></strong></span></li>
+																<li class="list-group-item d-flex justify-content-between"><span class="mb-0">Catatan Tim :</span></li>
+																<li class="list-group-item d-flex justify-content-between text-justify"><span class="mt-0"><strong><?=$pro['note_tim']?></strong></span></li>
+																<li class="list-group-item d-flex justify-content-between"><span class="mb-0">Catatan Mentor :</span></li>
+																<li class="list-group-item d-flex justify-content-between text-justify"><span class="mt-0"><strong><?=$pro['note_mentor']?></strong></span></li>
 															</ul>
 														</div>
 														<form method="POST" action="<?=base_url('C_tim/updateProgress/'.$pro['id_progresses'])?>" enctype="multipart/form-data">
@@ -144,7 +153,8 @@
 																		<span class="input-group-text">%</span>
 																	</div>
 																</div>
-
+																<label class="mt-3">Catatan Tim</label>
+																<textarea name="note_tim" placeholder="Tulis Catatan..." class="rounded p-3" rows="5"><?=$pro['note_tim']?></textarea>
 															</div>
 															<button class="btn btn-warning btn-block" type="submit">Submit</button>
 														</form>
@@ -208,6 +218,10 @@
 																<li class="list-group-item d-flex justify-content-between"><span class="mb-0">Minggu Ke :</span><strong><?=$pro['minggu_ke']?></strong></li>
 																<li class="list-group-item d-flex justify-content-between"><span class="mb-0">Deskripsi :</span></li>
 																<li class="list-group-item d-flex justify-content-between text-justify"><span class="mt-0"><strong><?=$pro['deskripsi']?></strong></span></li>
+																<li class="list-group-item d-flex justify-content-between"><span class="mb-0">Catatan Tim :</span></li>
+																<li class="list-group-item d-flex justify-content-between text-justify"><span class="mt-0"><strong><?=$pro['note_tim']?></strong></span></li>
+																<li class="list-group-item d-flex justify-content-between"><span class="mb-0">Catatan Mentor :</span></li>
+																<li class="list-group-item d-flex justify-content-between text-justify"><span class="mt-0"><strong><?=$pro['note_mentor']?></strong></span></li>
 															</ul>
 														</div>
 														<button class="btn bg-blue-light text-white btn-block" data-dismiss="modal">Tutup</button>

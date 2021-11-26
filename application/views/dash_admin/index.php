@@ -20,7 +20,7 @@
 											</span>
 										<div class="media-body">
 											<p class="fs-14 mb-2">Jumlah Tim Terdaftar</p>
-											<span class="title text-black font-w600">123 Tim</span>
+											<span class="title text-black font-w600"><?=$jmlTimTerdaftar?> Tim</span>
 										</div>
 									</div>
 									<div class="progress" style="height:5px;">
@@ -43,7 +43,7 @@
 											</span>
 										<div class="media-body">
 											<p class="fs-14 mb-2">Jumlah Mentor Aktif</p>
-											<span class="title text-black font-w600">2 Mentor</span>
+											<span class="title text-black font-w600"><?=$jmlMentorAktif?> Mentor</span>
 										</div>
 									</div>
 									<div class="progress" style="height:5px;">
@@ -60,15 +60,13 @@
 								<div class="card-body">
 									<div class="media align-items-center">
 											<span class="activity-icon bgl-danger mr-md-4 mr-3">
-												<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none" viewBox="0 0 24 24" stroke="#f94687">
-  <path d="M12 14l9-5-9-5-9 5 9 5z" />
-  <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
-<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
+												<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 20 20" fill="#f94687">
+  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd" />
 </svg>
 											</span>
 										<div class="media-body">
-											<p class="fs-14 mb-2">Jumlah Mentor Nonaktif</p>
-											<span class="title text-black font-w600">2 Mentor</span>
+											<p class="fs-14 mb-2">Jumlah Admin</p>
+											<span class="title text-black font-w600"><?=$jmlAdmin?> Admin</span>
 										</div>
 									</div>
 									<div class="progress" style="height:5px;">
@@ -90,8 +88,8 @@
 </svg>
 											</span>
 										<div class="media-body">
-											<p class="fs-14 mb-2">Jumlah Diskusi Bulan Ini</p>
-											<span class="title text-black font-w600">2 Diskusi</span>
+											<p class="fs-14 mb-2">Jumlah Diskusi</p>
+											<span class="title text-black font-w600"><?=$jmlDiskusi?> Diskusi</span>
 										</div>
 									</div>
 									<div class="progress" style="height:5px;">

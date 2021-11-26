@@ -28,7 +28,7 @@
 									<th>Presentase Target</th>
 									<th>Judul</th>
 									<th>Status</th>
-									<th>Action</th>
+
 								</tr>
 								</thead>
 								<tbody>
@@ -54,16 +54,7 @@
 												<div class="d-flex align-items-center text-capitalize"><i class="fa fa-circle text-danger mr-1"></i> <?=$t->status?></div>
 											<?php } ?>
 										</td>
-										<td>
-											<div class="d-flex">
-												<a href="#" class="btn btn-primary shadow btn-xs sharp mr-1" data-toggle="modal" data-target="#progresskModal-<?=$t->id_progresses?>"><i class="fa fa-pencil"></i></a>
-												<?php if ($t->is_verified == 1){ ?>
-													<a href="<?=base_url('C_admin/isUnverif/'.$t->id_progresses.'/progresses')?>" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-ban"></i></a>
-												<?php }else{ ?>
-												<a href="<?=base_url('C_admin/isVerif/'.$t->id_progresses.'/progresses')?>" class="btn btn-success shadow btn-xs sharp"><i class="fa fa-check"></i></a>
-												<?php } ?>
-											</div>
-										</td>
+
 									</tr>
 									<div class="modal fade" id="progresskModal-<?=$t->id_progresses?>">
 										<div class="modal-dialog" role="document">

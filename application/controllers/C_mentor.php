@@ -91,6 +91,54 @@ class C_mentor extends CI_Controller
 		}
 	}
 
+	public function unPickTim($id_tim)
+	{
+		$tim = $this->M_mentor->getTimByID($id_tim);
+
+		if (count($tim) == 0){
+			?>
+			<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+			<script src="<?php echo base_url('assets') ?>/js/jquery.min.js"></script>
+			<script type="text/javascript">
+				$(document).ready(function() {
+					Swal.fire({
+						icon: 'error',
+						title: 'Tim Tidak Ditemukan',
+						text: 'Ups, mungkin tim yang anda pilih tidak ada',
+					}).then(function() {
+						window.location = '<?= base_url("pick-tim") ?>';
+					});
+				});
+			</script>
+			<?php
+		}else{
+			$myTim	= $this->M_mentor->getTimbyMentor($this->session->all_userdata()['userdata']['id_mentor']);
+			if (count($myTim) == 1){
+				?>
+				<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+				<script src="<?php echo base_url('assets') ?>/js/jquery.min.js"></script>
+				<script type="text/javascript">
+					$(document).ready(function() {
+						Swal.fire({
+							icon: 'error',
+							title: 'Tim yang anda Unpick tidak lebih dari 1',
+							text: 'Ups, mungkin tim yang anda Unpick sudah mencapai maksimal Unpick',
+						}).then(function() {
+							window.location = '<?= base_url("pick-tim") ?>';
+						});
+					});
+				</script>
+				<?php
+			}else{
+				$data = [
+					'id_mentor'	=> NULL
+				];
+				$this->M_mentor->updateTim($id_tim, $data);
+				redirect('pick-tim');
+			}
+		}
+	}
+
 	public function vTasks()
 	{
 		$data['tasks'] = $this->M_mentor->getTasks($this->session->all_userdata()['userdata']['id_mentor']);
@@ -142,6 +190,8 @@ class C_mentor extends CI_Controller
 				'bulan'					=> $pro->bulan,
 				'minggu_ke'				=> $pro->minggu_ke,
 				'deskripsi'				=> $pro->deskripsi,
+				'note_tim'				=> $pro->note_tim,
+				'note_mentor'			=> $pro->note_mentor,
 				'status'				=> $pro->status,
 				'created_at'			=> $pro->created_at,
 				'bg'  					=> $bg_rand = $bg[array_rand($bg)]
@@ -155,7 +205,8 @@ class C_mentor extends CI_Controller
 	{
 		$input = $this->input->post();
 		$data = [
-			'status' => $input['status'],
+			'status' 		=> $input['status'],
+			'note_mentor'	=> $input['note_mentor']
 		];
 		$this->M_tim->updateProgress($data, $id);
 		redirect(base_url('cek-progress'));
@@ -278,26 +329,18 @@ class C_mentor extends CI_Controller
 		$this->upload->initialize($config);
 
 		if ( ! $this->upload->do_upload('foto')){
-			$error = array('error' => $this->upload->display_errors());
-			?>
-			<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-			<script src="<?php echo base_url('assets') ?>/plugins/jquery/jquery.min.js"></script>
-			<script type="text/javascript">
-				$(document).ready(function() {
-					Swal.fire({
-						icon: 'error',
-						title: 'Error',
-						text: '<?php echo $error['error']; ?>',
-					}).then(function() {
-						window.location = '<?= base_url() ?>materi-news-event-mentor';
-					});
-				});
-			</script>
-			<?php
+			$data = array(
+				'id_mentor' => $this->session->all_userdata()['userdata']['id_mentor'],
+				'judul'		=> $input['judul'],
+				'url' 		=> $input['url'],
+			);
+			$this->M_mentor->insertMateri($data);
+			redirect(base_url().'materi-news-event-mentor', 'refresh');
 		}
 		else{
 			$data 	= $this->upload->data();
 			$data = array(
+				'id_mentor' => $this->session->all_userdata()['userdata']['id_mentor'],
 				'foto'		=> base_url().'assets/materiFoto/'.$data['file_name'],
 				'judul'		=> $input['judul'],
 				'url' 		=> $input['url'],

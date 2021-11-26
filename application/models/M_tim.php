@@ -69,7 +69,7 @@ class M_tim extends CI_Model
 	{
 		$this->db->select('ma.*, m.nama as author');
 		$this->db->from('materi ma');
-		$this->db->join('mentors m', 'm.id_mentor = m.id_mentor');
+		$this->db->join('mentors m', 'ma.id_mentor = m.id_mentor');
 		$this->db->order_by('ma.id_materi', 'desc');
 		return $this->db->get()->result();
 	}

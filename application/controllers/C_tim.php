@@ -88,6 +88,8 @@ class C_tim extends CI_Controller
 				'bulan'					=> $pro->bulan,
 				'minggu_ke'				=> $pro->minggu_ke,
 				'deskripsi'				=> $pro->deskripsi,
+				'note_tim'				=> $pro->note_tim,
+				'note_mentor'			=> $pro->note_mentor,
 				'status'				=> $pro->status,
 				'created_at'			=> $pro->created_at,
 				'bg'  					=> $bg_rand = $bg[array_rand($bg)]
@@ -107,7 +109,8 @@ class C_tim extends CI_Controller
 		$input = $this->input->post();
 		$data = [
 			'presentase_progress' => $input['presentase_progress'],
-			'status'			  => 'sedang dicek'
+			'status'			  => 'sedang dicek',
+			'note_tim'			  => $input['note_tim']
 		];
 		$this->M_tim->updateProgress($data, $id);
 		redirect(base_url('progress'));

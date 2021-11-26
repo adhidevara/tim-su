@@ -16,10 +16,10 @@
 <!--										<path fill-rule="evenodd" d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd" />-->
 <!--									</svg>-->
 									<div class="text-center mb-3">
-										<a href="index.html"><img src="<?php echo base_url('assets') ?>/images/logo-full.png" alt=""></a>
+										<a href="<?php echo base_url() ?>" class="bg-white rounded py-4 px-3"><img src="<?php echo base_url('assets') ?>/images/logo-full.png" alt=""></a>
 									</div>
 									<?php if ($usercontext == md5('tim-su')){ ?>
-									<h4 class="text-center mb-4 text-white">Masuk ke akun <b>TIM-SU</b></h4>
+									<h4 class="text-center mb-4 text-white">Masuk ke akun <b>TIM STARTUP LAUNCHPAD</b></h4>
 									<?php } elseif ($usercontext == md5('mentor')){ ?>
 									<h4 class="text-center mb-4 text-white">Masuk ke akun <b>Mentor</b></h4>
 									<?php } elseif ($usercontext == md5('admin')){ ?>

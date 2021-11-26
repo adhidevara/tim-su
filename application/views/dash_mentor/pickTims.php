@@ -36,6 +36,7 @@
 										<p>No.Telp: <span class="item"><?=$at->notelp?></span> </p>
 										<p>Ketua: <span class="item"><?=$at->nama_ketua?> (<?=$at->email_ketua." / ".$at->notelp_ketua?>)</span></p>
 										<p class="text-content"><?=$at->intro?></p>
+										<a href="<?=base_url('C_mentor/unPickTim/'.$at->id_tim)?>" class="btn btn-danger btn-block mt-3">Unpick Tim</a>
 									</div>
 								</div>
 							</div>

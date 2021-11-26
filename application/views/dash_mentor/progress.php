@@ -58,6 +58,10 @@
 																<li class="list-group-item d-flex justify-content-between"><span class="mb-0">Minggu Ke :</span><strong><?=$pro['minggu_ke']?></strong></li>
 																<li class="list-group-item d-flex justify-content-between"><span class="mb-0">Deskripsi :</span></li>
 																<li class="list-group-item d-flex justify-content-between text-justify"><span class="mt-0"><strong><?=$pro['deskripsi']?></strong></span></li>
+																<li class="list-group-item d-flex justify-content-between"><span class="mb-0">Catatan Tim :</span></li>
+																<li class="list-group-item d-flex justify-content-between text-justify"><span class="mt-0"><strong><?=$pro['note_tim']?></strong></span></li>
+																<li class="list-group-item d-flex justify-content-between"><span class="mb-0">Catatan Mentor :</span></li>
+																<li class="list-group-item d-flex justify-content-between text-justify"><span class="mt-0"><strong><?=$pro['note_mentor']?></strong></span></li>
 															</ul>
 														</div>
 														<button class="btn btn-danger btn-block" data-dismiss="modal">Tutup</button>
@@ -121,6 +125,10 @@
 																<li class="list-group-item d-flex justify-content-between"><span class="mb-0">Minggu Ke :</span><strong><?=$pro['minggu_ke']?></strong></li>
 																<li class="list-group-item d-flex justify-content-between"><span class="mb-0">Deskripsi :</span></li>
 																<li class="list-group-item d-flex justify-content-between text-justify"><span class="mt-0"><strong><?=$pro['deskripsi']?></strong></span></li>
+																<li class="list-group-item d-flex justify-content-between"><span class="mb-0">Catatan Tim :</span></li>
+																<li class="list-group-item d-flex justify-content-between text-justify"><span class="mt-0"><strong><?=$pro['note_tim']?></strong></span></li>
+																<li class="list-group-item d-flex justify-content-between"><span class="mb-0">Catatan Mentor :</span></li>
+																<li class="list-group-item d-flex justify-content-between text-justify"><span class="mt-0"><strong><?=$pro['note_mentor']?></strong></span></li>
 															</ul>
 														</div>
 														<form method="POST" action="<?=base_url('C_mentor/updateProgress/'.$pro['id_progresses'])?>" enctype="multipart/form-data">
@@ -137,7 +145,8 @@
 																	<option value="sudah dicek">Selesai</option>
 																	<option value="belum dicek">Recheck</option>
 																</select>
-
+																<label class="mt-3">Catatan Mentor</label>
+																<textarea name="note_mentor" placeholder="Tulis Catatan..." class="rounded p-3" rows="5"><?=$pro['note_mentor']?></textarea>
 															</div>
 															<button class="btn btn-warning btn-block" type="submit">Submit</button>
 														</form>
@@ -201,9 +210,31 @@
 																<li class="list-group-item d-flex justify-content-between"><span class="mb-0">Minggu Ke :</span><strong><?=$pro['minggu_ke']?></strong></li>
 																<li class="list-group-item d-flex justify-content-between"><span class="mb-0">Deskripsi :</span></li>
 																<li class="list-group-item d-flex justify-content-between text-justify"><span class="mt-0"><strong><?=$pro['deskripsi']?></strong></span></li>
+																<li class="list-group-item d-flex justify-content-between"><span class="mb-0">Catatan Tim :</span></li>
+																<li class="list-group-item d-flex justify-content-between text-justify"><span class="mt-0"><strong><?=$pro['note_tim']?></strong></span></li>
+																<li class="list-group-item d-flex justify-content-between"><span class="mb-0">Catatan Mentor :</span></li>
+																<li class="list-group-item d-flex justify-content-between text-justify"><span class="mt-0"><strong><?=$pro['note_mentor']?></strong></span></li>
 															</ul>
 														</div>
-														<button class="btn bg-blue-light text-white btn-block" data-dismiss="modal">Tutup</button>
+														<form method="POST" action="<?=base_url('C_mentor/updateProgress/'.$pro['id_progresses'])?>" enctype="multipart/form-data">
+															<div class="card text-white bg-blue-light p-4">
+																<label>Status Progress</label>
+																<!--																<div class="input-group col-md-12">-->
+																<!--																	<input required type="number" class="form-control" name="presentase_progress" placeholder="Masukkan persentase (%)" value="--><?//=$pro['presentase_progress']?><!--">-->
+																<!--																	<div class="input-group-append">-->
+																<!--																		<span class="input-group-text">%</span>-->
+																<!--																	</div>-->
+																<!--																</div>-->
+																<select required="0" id="inputState" class="form-control default-select" name="status">
+																	<option selected value="0">Pilih Status...</option>
+																	<option value="sedang dicek">Sedang Di Cek</option>
+																	<option value="belum dicek">Recheck</option>
+																</select>
+																<label class="mt-3">Catatan Mentor</label>
+																<textarea name="note_mentor" placeholder="Tulis Catatan..." class="rounded p-3" rows="5"><?=$pro['note_mentor']?></textarea>
+															</div>
+															<button class="btn bg-blue-light text-white btn-block" type="submit">Submit</button>
+														</form>
 													</div>
 												</div>
 											</div>
