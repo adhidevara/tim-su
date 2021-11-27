@@ -423,6 +423,7 @@ class C_admin extends CI_Controller
 
 	public function vDiscussion()
 	{
+		error_reporting(0);
 		$diskusi = $this->M_tim->getDiskusi();
 		$data = [];
 		foreach ($diskusi as $ds){

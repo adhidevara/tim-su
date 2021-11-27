@@ -176,6 +176,7 @@ class C_mentor extends CI_Controller
 
 	public function vProgress()
 	{
+		error_reporting(0);
 		$bg = ['info', 'danger', 'dark', 'primary', 'blue-dark', 'blue', 'blue-light', 'secondary', 'danger'];
 		$progress = $this->M_mentor->getProgress($this->session->all_userdata()['userdata']['id_mentor']);
 		$data = [];
@@ -264,6 +265,7 @@ class C_mentor extends CI_Controller
 
 	public function vDiscussion()
 	{
+		error_reporting(0);
 		$diskusi = $this->M_tim->getDiskusi();
 		$data = [];
 		foreach ($diskusi as $ds){

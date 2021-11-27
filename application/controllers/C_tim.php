@@ -76,25 +76,45 @@ class C_tim extends CI_Controller
 	{
 		$bg = ['info', 'danger', 'dark', 'primary', 'blue-dark', 'blue', 'blue-light', 'secondary', 'danger'];
 		$progress = $this->M_tim->getProgress($this->session->all_userdata()['userdata']['id_tim']);
-		$data = [];
-		foreach ($progress as $pro){
+		if (count($progress) == 0){
 			$getData = [
-				'id_progresses' 		=> $pro->id_progresses,
-				'id_tim'				=> $pro->id_tim,
-				'id_mentor'				=> $pro->id_mentor,
-				'judul'					=> $pro->judul,
-				'presentase_target'		=> $pro->presentase_target,
-				'presentase_progress'	=> $pro->presentase_progress,
-				'bulan'					=> $pro->bulan,
-				'minggu_ke'				=> $pro->minggu_ke,
-				'deskripsi'				=> $pro->deskripsi,
-				'note_tim'				=> $pro->note_tim,
-				'note_mentor'			=> $pro->note_mentor,
-				'status'				=> $pro->status,
-				'created_at'			=> $pro->created_at,
+				'id_progresses' 		=> 0,
+				'id_tim'				=> 0,
+				'id_mentor'				=> 0,
+				'judul'					=> '',
+				'presentase_target'		=> '',
+				'presentase_progress'	=> '',
+				'bulan'					=> '',
+				'minggu_ke'				=> '',
+				'deskripsi'				=> '',
+				'note_tim'				=> '',
+				'note_mentor'			=> '',
+				'status'				=> '',
+				'created_at'			=> '',
 				'bg'  					=> $bg_rand = $bg[array_rand($bg)]
 			];
 			$data['progress'][] = $getData;
+		}else{
+			$data = [];
+			foreach ($progress as $pro){
+				$getData = [
+					'id_progresses' 		=> $pro->id_progresses,
+					'id_tim'				=> $pro->id_tim,
+					'id_mentor'				=> $pro->id_mentor,
+					'judul'					=> $pro->judul,
+					'presentase_target'		=> $pro->presentase_target,
+					'presentase_progress'	=> $pro->presentase_progress,
+					'bulan'					=> $pro->bulan,
+					'minggu_ke'				=> $pro->minggu_ke,
+					'deskripsi'				=> $pro->deskripsi,
+					'note_tim'				=> $pro->note_tim,
+					'note_mentor'			=> $pro->note_mentor,
+					'status'				=> $pro->status,
+					'created_at'			=> $pro->created_at,
+					'bg'  					=> $bg_rand = $bg[array_rand($bg)]
+				];
+				$data['progress'][] = $getData;
+			}
 		}
 		$this->load->view('dash_tim/progress', $data);
 	}
@@ -167,6 +187,7 @@ class C_tim extends CI_Controller
 
 	public function vDiscussion()
 	{
+		error_reporting(0);
 		$diskusi = $this->M_tim->getDiskusi();
 		$data = [];
 		foreach ($diskusi as $ds){
